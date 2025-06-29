@@ -37,3 +37,21 @@ def fetch_hacker_news():
         })
 
     return articles
+
+
+def filter_articles_by_keywords(articles, keywords):
+    """
+    Filter articles whose titles contain any of the specified keywords (case-insensitive).
+
+    :param articles: List of article dictionaries
+    :param keywords: List of keywords (strings)
+    :return: Filtered list of articles
+    """
+    keywords = [kw.lower() for kw in keywords]
+
+    filtered = [
+        article for article in articles
+        if any(kw in article["title"].lower() for kw in keywords)
+    ]
+
+    return filtered

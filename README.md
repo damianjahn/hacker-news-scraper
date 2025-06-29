@@ -13,6 +13,8 @@ A simple Python web scraper for extracting top articles from [Hacker News](https
   - Points (upvotes)
   - Author
   - Comments count
+- Keyword filtering (case-insensitive) with command line arguments
+- Saves results to `.csv` file with date-based filename
 - Includes unit tests with `pytest`
 - Mocked tests for:
   - Missing points
@@ -44,11 +46,25 @@ pip install -r requirements.txt
 
 Run the scraper manually:
 
+### Without filtering (saves all articles):
+
 ```bash
 python run_scraper.py
 ```
 
-This will print the top Hacker News articles with details.
+### With keyword filtering:
+
+```bash
+python run_scraper.py --keywords Python AI "Machine Learning"
+```
+
+### Custom output filename:
+
+```bash
+python run_scraper.py --keywords Python AI --output hacker_news_filtered
+```
+
+The results will be saved to a `.csv` file with the current date in the filename.
 
 ---
 
@@ -69,10 +85,13 @@ The project includes both:
 ```
 hacker-news-scraper/
 ├── scraper/            # Scraper logic
-│   └── hacker_news.py
+│   ├── hacker_news.py
+│   ├── save_results.py
 ├── tests/              # PyTest test suite
-│   └── test_hacker_news.py
-├── run_scraper.py      # Manual scraper runner
+│   ├── test_hacker_news.py
+│   ├── test_save_results.py
+│   └── test_filter.py
+├── run_scraper.py      # Manual scraper runner with CLI
 ├── requirements.txt
 └── README.md
 ```
@@ -82,7 +101,6 @@ hacker-news-scraper/
 ## 📧 Future Ideas
 
 - Automatically email yourself the scraped articles
-- Filter articles by keywords
 - Schedule scraper to run weekly with `schedule` or `cron`
 - Deploy as a small API with Flask or FastAPI
 
@@ -100,3 +118,4 @@ This project is for educational purposes. Scrape responsibly and respect target 
 - `requests`
 - `beautifulsoup4`
 - `pytest`
+- `argparse` (built-in)
