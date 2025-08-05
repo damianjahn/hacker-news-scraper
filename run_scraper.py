@@ -2,7 +2,7 @@ import argparse
 from datetime import datetime
 from Scraper.hacker_news import fetch_hacker_news, filter_articles_by_keywords
 from Scraper.save_results import save_articles_to_csv
-from Scraper.email_sender import SmtpEmailSender
+from Scraper.email_sender import EmailSender, SmtpEmailSender
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Hacker News Scraper with keyword filtering and email support")
@@ -53,7 +53,7 @@ if __name__ == "__main__":
         smtp_port = 465
         smtp_password = "your_app_password"
 
-        email_sender = SmtpEmailSender(
+        email_sender: EmailSender = SmtpEmailSender(
             sender_email=sender_email,
             receiver_email=receiver_email,
             smtp_server=smtp_server,
